@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.ljh.pojo"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="com/ljh/dao/StudentMapper.xml"/>
+        <mapper resource="com/ljh/dao/UserMapper.xml"/>
+        <mapper resource="com/ljh/dao/DepartmentMapper.xml"/>
+        <mapper resource="com/ljh/dao/ClassMapper.xml"/>
+        <mapper resource="com/ljh/dao/CourseMapper.xml"/>
+        <mapper resource="com/ljh/dao/GradeMapper.xml"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.dao.DepartmentMapper">
+    <insert id="addDepartment" parameterType="Department">
+        insert into department (系名) values(#{DepartmentName})
+    </insert>
+    <delete id="deleteDepartment" parameterType="int">
+        delete from department where 系号=#{id}
+    </delete>
+    <update id="updateDepartment" parameterType="Department">
+        update department set 系名=#{DepartmentName} where 系号=#{DepartmentId}
+    </update>
+    <select id="queryDepartmentById" parameterType="String" resultType="Department">
+        select * from department where 系号=#{id}
+    </select>
+    <select id="queryDepartmentAll" resultType="Department">
+        select * from department
+    </select>
+</mapper>

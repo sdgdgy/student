@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.dao.GradeMapper">
+    <insert id="addGrade" parameterType="Grade">
+        insert into grade values(#{id},#{ClassId},#{Mark})
+    </insert>
+    <delete id="deleteGrade">
+        delete from grade where 课程号=#{ClassId} and 学号=#{id}
+    </delete>
+    <update id="updateGrade" parameterType="Grade">
+        update grade set 成绩=#{Mark} where 课程号=#{ClassId} and 学号=#{id}
+    </update>
+    <select id="queryGradeById" parameterType="String" resultType="Grade">
+        select * from grade where 学号=#{id}
+    </select>
+    <select id="queryGradeAll" resultType="Grade">
+        select * from grade
+    </select>
+</mapper>
