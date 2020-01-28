@@ -16,4 +16,6 @@ public interface UserService {
     List<User> queryUserById(@Param("id") String id);
     //查询全部User
     List<User> queryUserAll();
+
+    List<User> queryUser(User user);
 }
