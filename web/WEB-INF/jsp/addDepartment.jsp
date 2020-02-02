@@ -224,31 +224,24 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-
             <div class="container-fluid">
-
                 <div class="row">
+
                     <div class="col-lg-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4>添加系别</h4>
+                            </div>
                             <div class="card-body">
-
-                                <div class="edit-avatar">
-                                    <img src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="..." class="img-avatar">
-                                    <div class="avatar-divider"></div>
-                                    <div class="edit-avatar-content">
-                                        <button class="btn btn-default">修改头像</button>
-                                        <p class="m-0">选择一张你喜欢的图片，裁剪后会自动生成264x264大小，上传图片大小不能超过2M。</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <form method="post" action="#!" class="site-form">
+                                <form action="${pageContext.request.contextPath}/department/add" method="post">
+                                        <label>系名</label>
                                     <div class="form-group">
-                                        <label for="username">用户名</label>
-                                        <input type="text" class="form-control" name="username" id="username" value="${username}" disabled="disabled"/>
+                                        <input class="form-control" type="text" name="DepartmentName" autocomplete="off" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">保存</button>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">添加</button>
+                                    </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

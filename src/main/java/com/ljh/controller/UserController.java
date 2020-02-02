@@ -21,7 +21,7 @@ public class UserController {
         try {
             user1 = userService.queryUser(user).get(0);
             if(user1!=null){
-                httpSession.setAttribute("user",user1.getId());
+                httpSession.setAttribute("username",user1.getId());
                 if(user1.getIdentity()==0){
                     return "management";
                 }else{
@@ -38,5 +38,11 @@ public class UserController {
     public String logout(HttpSession httpSession){
         httpSession.invalidate();
         return "login";
+    }
+    @RequestMapping("updatePassword")
+    public String updatePassword(String confirmpwd,HttpSession httpSession){
+        User user=new User(httpSession.getAttribute("username").toString(),confirmpwd,0);
+        userService.updateUser(user);
+        return "management";
     }
 }

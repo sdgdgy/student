@@ -14,7 +14,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.departmentMapper = departmentMapper;
     }
 
-    public int addDepartment(Department department) {
+    public int addDepartment(String department) {
         departmentMapper.addDepartment(department);
         return 1;
     }

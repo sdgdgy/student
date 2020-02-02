@@ -26,6 +26,7 @@
       border-radius: 4px;
     }
   </style>
+  <link rel="icon" href="${pageContext.request.contextPath}/statics/favicon.ico" type="image/ico">
 </head>
 <body>
 

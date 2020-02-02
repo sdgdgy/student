@@ -224,31 +224,29 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-
             <div class="container-fluid">
-
                 <div class="row">
+
                     <div class="col-lg-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4>修改课程表信息</h4>
+                            </div>
                             <div class="card-body">
-
-                                <div class="edit-avatar">
-                                    <img src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="..." class="img-avatar">
-                                    <div class="avatar-divider"></div>
-                                    <div class="edit-avatar-content">
-                                        <button class="btn btn-default">修改头像</button>
-                                        <p class="m-0">选择一张你喜欢的图片，裁剪后会自动生成264x264大小，上传图片大小不能超过2M。</p>
+                                <form action="${pageContext.request.contextPath}/course/update" method="post" id="updateCourse_form">
+                                    <input class="form-control" type="hidden" name="CourseId" value="${courseOne.get(0).getCourseId()}">
+                                    <div class="form-group" id="CourseName-div">
+                                        <label>课程名称</label>
+                                        <input class="form-control" type="text" value="${courseOne.get(0).getCourseName()}" name="CourseName" required id="CourseName">
                                     </div>
-                                </div>
-                                <hr>
-                                <form method="post" action="#!" class="site-form">
+                                    <div class="form-group" id="Credit-div">
+                                        <label>学分</label>
+                                        <input class="form-control" type="text" name="Credit" value="${courseOne.get(0).getCredit()}" id="Credit" required>
+                                    </div>
                                     <div class="form-group">
-                                        <label for="username">用户名</label>
-                                        <input type="text" class="form-control" name="username" id="username" value="${username}" disabled="disabled"/>
+                                        <button class="btn btn-primary" type="button" id="updateCourse">保存</button>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">保存</button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -267,5 +265,20 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
+<script type="text/javascript">
+    $("#updateCourse").click(function(){
+        if($("#CourseName").val()==""){
+            $("#CourseName-div").addClass("form-group has-error");
+        }else{
+            $("#CourseName-div").removeClass("form-group has-error");
+        }
+        if($("#Credit").val()==""||isNaN($("#Credit").val())){
+            $("#Credit-div").addClass("form-group has-error");
+        }else{
+            $("#Credit-div").removeClass("form-group has-error");
+            $("#updateCourse_form").submit();
+        }
+    })
+</script>
 </body>
 </html>

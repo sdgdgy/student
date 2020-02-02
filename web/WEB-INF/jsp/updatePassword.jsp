@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>后台管理页面</title>
-  <link rel="icon" href="favicon.ico" type="image/ico">
+  <link rel="icon" href="${pageContext.request.contextPath}/statics/favicon.ico" type="image/ico">
   <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
   <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
   <meta name="author" content="yinqi">
@@ -78,7 +78,7 @@
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="笔下光年" />
-                <span>${user} <span class="caret"></span></span>
+                <span>${username} <span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li> <a href="${pageContext.request.contextPath}/PageJump/toPersonalInformation"><i class="mdi mdi-account"></i> 个人信息</a> </li>
@@ -232,20 +232,16 @@
             <div class="card">
               <div class="card-body">
 
-                <form method="post" action="#!" class="site-form">
-                  <div class="form-group">
-                    <label for="old-password">旧密码</label>
-                    <input type="password" class="form-control" name="oldpwd" id="old-password" placeholder="输入账号的原登录密码">
-                  </div>
-                  <div class="form-group">
+                <form method="post" action="${pageContext.request.contextPath}/User/updatePassword" class="site-form" id="form-check">
+                  <div class="form-group" id="new-password-div">
                     <label for="new-password">新密码</label>
-                    <input type="password" class="form-control" name="newpwd" id="new-password" placeholder="输入新的密码">
+                    <input type="password" class="form-control" name="newpwd" id="new-password" placeholder="输入新的密码" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" id="confirm-password-div">
                     <label for="confirm-password">确认新密码</label>
-                    <input type="password" class="form-control" name="confirmpwd" id="confirm-password" placeholder="请输入正确的邮箱地址">
+                    <input type="password" class="form-control" name="confirmpwd" id="confirm-password" placeholder="确认新的密码" required>
                   </div>
-                  <button type="submit" class="btn btn-primary">修改密码</button>
+                  <button type="button" class="btn btn-primary" id="update_password">修改密码</button>
                 </form>
 
               </div>
@@ -266,5 +262,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
+<script type="text/javascript">
+  $("#update_password").click(function(){
+    if($("#new-password").val()==$("#confirm-password").val()){
+      $("#new-password-div").removeClass("form-group has-error");
+      $("#confirm-password-div").removeClass("form-group has-error");
+      $("#form-check").submit();
+    }else{
+      $("#new-password-div").addClass("form-group has-error");
+      $("#confirm-password-div").addClass("form-group has-error");
+    }
+  })
+</script>
 </body>
 </html>

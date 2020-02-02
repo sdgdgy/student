@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DepartmentService {
     //添加一个系别
-    int addDepartment(Department department);
+    int addDepartment(String department);
     //删除一个系别
     int deleteDepartment(@Param("id") int id);
     //修改一个系别

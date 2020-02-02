@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljh.dao.CourseMapper">
     <insert id="addCourse" parameterType="Course">
-        insert into course (课程名称,学分) values(#{CourseName},#{Credit})
+        insert into course (CourseName,Credit) values(#{CourseName},#{Credit})
     </insert>
     <delete id="deleteCourse" parameterType="int">
-        delete from course where 班级号=#{id}
+        delete from course where CourseId=#{id}
     </delete>
     <update id="updateCourse" parameterType="Course">
-        update course set 课程名称=#{CourseName},学分=#{Credit} where 课程号=#{CourseId}
+        update course set CourseName=#{CourseName},Credit=#{Credit} where CourseId=#{CourseId}
     </update>
     <select id="queryCourseById" parameterType="int" resultType="Course">
-        select * from course where 课程号=#{id}
+        select * from course where CourseId=#{id}
     </select>
     <select id="queryCourseAll" resultType="Course">
         select * from course

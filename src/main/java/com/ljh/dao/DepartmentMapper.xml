@@ -4,18 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljh.dao.DepartmentMapper">
     <insert id="addDepartment" parameterType="Department">
-        insert into department (系名) values(#{DepartmentName})
+        insert into department (DepartmentName) values(#{department})
     </insert>
     <delete id="deleteDepartment" parameterType="int">
-        delete from department where 系号=#{id}
+        delete from department where DepartmentId=#{id}
     </delete>
     <update id="updateDepartment" parameterType="Department">
-        update department set 系名=#{DepartmentName} where 系号=#{DepartmentId}
+        update department set DepartmentName=#{DepartmentName} where DepartmentId=#{DepartmentId}
     </update>
-    <select id="queryDepartmentById" parameterType="String" resultType="Department">
-        select * from department where 系号=#{id}
+    <select id="queryDepartmentById" parameterType="int" resultType="Department">
+        select * from department where DepartmentId=#{id}
     </select>
     <select id="queryDepartmentAll" resultType="Department">
-        select * from department
+        select * from student.department
     </select>
 </mapper>

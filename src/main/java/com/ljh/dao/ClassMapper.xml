@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljh.dao.ClassMapper">
     <insert id="addClass" parameterType="Class">
-        insert into class (班级名,系号) values(#{ClassName},#{DepartmentId})
+        insert into class (ClassName,DepartmentId) values(#{ClassName},#{DepartmentId})
     </insert>
     <delete id="deleteClass" parameterType="int">
-        delete from class where 班级号=#{id}
+        delete from class where ClassId=#{id}
     </delete>
     <update id="updateClass" parameterType="Class">
-        update class set 班级名=#{ClassName},系号=#{DepartmentId} where 班级号=#{ClassId}
+        update class set ClassName=#{ClassName},DepartmentId=#{DepartmentId} where ClassId=#{ClassId}
     </update>
     <select id="queryClassById" parameterType="int" resultType="Class">
-        select * from class where 班级号=#{id}
+        select * from class where ClassId=#{id}
     </select>
     <select id="queryClassAll" resultType="Class">
         select * from class

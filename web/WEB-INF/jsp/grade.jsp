@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>后台管理页面</title>
-    <link rel="icon" href="favicon.ico" type="image/ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/statics/favicon.ico" type="image/ico">
     <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
     <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
     <meta name="author" content="yinqi">
@@ -78,7 +78,7 @@
                         <li class="dropdown dropdown-profile">
                             <a href="javascript:void(0)" data-toggle="dropdown">
                                 <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="笔下光年" />
-                                <span>${user} <span class="caret"></span></span>
+                                <span>${username} <span class="caret"></span></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li> <a href="${pageContext.request.contextPath}/PageJump/toPersonalInformation"><i class="mdi mdi-account"></i> 个人信息</a> </li>
@@ -241,9 +241,24 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
+                                            <td style="text-align:center">学号</td>
+                                            <td style="text-align:center">课程号</td>
+                                            <td style="text-align:center">成绩</td>
+                                            <td style="text-align:center">操作</td>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach var="grade" items="${requestScope.get('gradelist')}">
+                                            <tr>
+                                                <td style="text-align:center">${grade.getId()}</td>
+                                                <td style="text-align:center">${grade.getClassId()}</td>
+                                                <td style="text-align:center">${grade.getMark()}</td>
+                                                <td style="text-align:center">
+                                                    <a href="">更改</a> |
+                                                    <a href="" data-toggle="modal" onclick="">删除</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

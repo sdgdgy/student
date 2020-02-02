@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>后台管理页面</title>
-    <link rel="icon" href="favicon.ico" type="image/ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/statics/favicon.ico" type="image/ico">
     <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
     <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
     <meta name="author" content="yinqi">
@@ -78,7 +78,7 @@
                         <li class="dropdown dropdown-profile">
                             <a href="javascript:void(0)" data-toggle="dropdown">
                                 <img class="img-avatar img-avatar-48 m-r-10" src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="笔下光年" />
-                                <span>${user} <span class="caret"></span></span>
+                                <span>${username} <span class="caret"></span></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li> <a href="${pageContext.request.contextPath}/PageJump/toPersonalInformation"><i class="mdi mdi-account"></i> 个人信息</a> </li>
@@ -224,11 +224,27 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
+            <!--模态框-->
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">提示</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>是否删除</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <%--                <a type="button" class="btn btn-primary" id="bookid" href="${pageContext.request.contextPath}/book/del/?id=${book.getBookID()}">确定</a>--%>
+                            <a type="button" class="btn btn-primary" id="departmentid" href="">确定</a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
             <div class="container-fluid">
-
-
-
                 <div class="row">
 
                     <div class="col-lg-12">
@@ -238,12 +254,26 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageJump/toAddDepartment">添加系别</a>
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
+                                        <td style="text-align:center">系号</td>
+                                        <td style="text-align:center">系名</td>
+                                        <td style="text-align:center">操作</td>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach var="department" items="${requestScope.get('departmentlist')}">
+                                            <tr>
+                                                <td style="text-align:center">${department.getDepartmentId()}</td>
+                                                <td style="text-align:center">${department.getDepartmentName()}</td>
+                                                <td style="text-align:center">
+                                                    <a href="${pageContext.request.contextPath}/PageJump/toUpdateDepartment?id=${department.getDepartmentId()}">更改</a> |
+                                                    <a href="#myModal" data-toggle="modal" onclick="value(${department.getDepartmentId()})">删除</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -265,5 +295,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
+<script type="text/javascript">
+    function value(id) {
+        document.getElementById("departmentid").href="${pageContext.request.contextPath}/department/del/?id="+id;
+    }
+</script>
 </body>
 </html>
