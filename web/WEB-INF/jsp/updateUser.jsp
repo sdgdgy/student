@@ -224,60 +224,27 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-            <!--模态框-->
-            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">提示</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>是否删除</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <%--                <a type="button" class="btn btn-primary" id="bookid" href="${pageContext.request.contextPath}/book/del/?id=${book.getBookID()}">确定</a>--%>
-                            <a type="button" class="btn btn-primary" id="gradeid" href="">确定</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <div class="container-fluid">
-                <div class="row">
 
+            <div class="container-fluid">
+
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>项目信息</h4>
-                            </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageJump/toAddGrade">添加学生成绩</a>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <td style="text-align:center">学号</td>
-                                            <td style="text-align:center">课程号</td>
-                                            <td style="text-align:center">成绩</td>
-                                            <td style="text-align:center">操作</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="grade" items="${requestScope.get('gradelist')}">
-                                            <tr>
-                                                <td style="text-align:center">${grade.getId()}</td>
-                                                <td style="text-align:center">${grade.getCourseId()}</td>
-                                                <td style="text-align:center">${grade.getMark()}</td>
-                                                <td style="text-align:center">
-                                                    <a href="${pageContext.request.contextPath}/PageJump/toUpdateGrade?id=${grade.getId()}&courseid=${grade.getCourseId()}">更改</a> |
-                                                    <a href="#myModal" data-toggle="modal" onclick="value(${grade.getId()},${grade.getCourseId()})">删除</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form method="post" action="${pageContext.request.contextPath}/User/update" class="site-form" id="form-check">
+                                    <div class="form-group" id="new-password-div">
+                                        <label>学号</label>
+                                        <input type="hidden" class="form-control" required value="${userOne.get(0).getId()}" name="id">
+                                        <input type="text" class="form-control" required disabled value="${userOne.get(0).getId()}">
+                                    </div>
+                                    <div class="form-group" id="confirm-password-div">
+                                        <label>密码</label>
+                                        <input type="text" class="form-control" required name="password" value="${userOne.get(0).getPassword()}">
+                                    </div>
+                                    <input type="hidden" class="form-control" required name="identity" value="${userOne.get(0).getIdentity()}">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -290,16 +257,10 @@
         <!--End 页面主要内容-->
     </div>
 </div>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
-<script type="text/javascript">
-    function value(id,courseid) {
-        document.getElementById("gradeid").href="${pageContext.request.contextPath}/grade/del/?id="+id+"&courseid="+courseid;
-    }
-</script>
 </body>
 </html>

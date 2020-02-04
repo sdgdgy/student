@@ -16,4 +16,6 @@ public interface StudentMapper {
     List<Student> queryStudentById(@Param("id") String id);
     //查询全部学生
     List<Student> queryStudentAll();
+
+    List<Student> queryStudentByClassId(@Param("classid")int classid);
 }

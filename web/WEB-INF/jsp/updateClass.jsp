@@ -230,7 +230,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>修改系别表信息</h4>
+                                <h4>修改班级表信息</h4>
                             </div>
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/class/update" method="post">

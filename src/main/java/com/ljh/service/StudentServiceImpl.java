@@ -36,4 +36,8 @@ public class StudentServiceImpl implements StudentService{
     public List<Student> queryStudentAll() {
         return studentMapper.queryStudentAll();
     }
+
+    public List<Student> queryStudentByClassId(int classid) {
+        return studentMapper.queryStudentByClassId(classid);
+    }
 }

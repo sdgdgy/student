@@ -1,6 +1,8 @@
 package com.ljh.controller;
 
 import com.ljh.pojo.Class;
+import com.ljh.pojo.Grade;
+import com.ljh.pojo.Student;
 import com.ljh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -107,5 +109,41 @@ public class PageJumpController {
     public String toUpdateCourse(int id,Model model){
         model.addAttribute("courseOne",courseService.queryCourseById(id));
         return "updateCourse";
+    }
+    @RequestMapping("toUpdateUser")
+    public String toUpdateUser(String id,Model model){
+        model.addAttribute("userOne",userService.queryUserById(id));
+        return "updateUser";
+    }
+    @RequestMapping("toAddUser")
+    public String toAddUser(){
+        return "addUser";
+    }
+    @RequestMapping("toAddStudent")
+    public String toAddStudent(Model model){
+        model.addAttribute("classlist",classService.queryClassAll());
+        return "addStudent";
+    }
+    @RequestMapping("toUpdateStudent")
+    public String toUpdateStudent(String id,Model model){
+        List<Student> list = studentService.queryStudentById(id);
+        model.addAttribute("studentOne",list);
+        model.addAttribute("classlist",classService.queryClassAll());
+        model.addAttribute("studentOne_class",classService.queryClassById(list.get(0).getClassId()));
+        return "updateStudent";
+    }
+    @RequestMapping("toAddGrade")
+    public String toAddGrade(Model model){
+        model.addAttribute("departmentlist",departmentService.queryDepartmentAll());
+        model.addAttribute("courselist",courseService.queryCourseAll());
+        return "addGrade";
+    }
+    @RequestMapping("toUpdateGrade")
+    public String toUpdateGrade(Model model,String id,int courseid){
+        Grade grade=new Grade(id,courseid,0);
+        model.addAttribute("gradeOne",gradeService.queryGradeById(grade));
+        model.addAttribute("courselist",courseService.queryCourseAll());
+        model.addAttribute("gradeOne_course",courseService.queryCourseById(courseid));
+        return "updateGrade";
     }
 }

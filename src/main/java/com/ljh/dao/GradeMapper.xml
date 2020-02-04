@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljh.dao.GradeMapper">
     <insert id="addGrade" parameterType="Grade">
-        insert into grade values(#{id},#{ClassId},#{Mark})
+        insert into grade values(#{id},#{CourseId},#{Mark})
     </insert>
     <delete id="deleteGrade">
-        delete from grade where 课程号=#{ClassId} and 学号=#{id}
+        delete from grade where CourseId=#{CourseId} and id=#{id}
     </delete>
     <update id="updateGrade" parameterType="Grade">
-        update grade set 成绩=#{Mark} where 课程号=#{ClassId} and 学号=#{id}
+        update grade set Mark=#{Mark} where CourseId=#{CourseId} and id=#{id}
     </update>
-    <select id="queryGradeById" parameterType="String" resultType="Grade">
-        select * from grade where 学号=#{id}
+    <select id="queryGradeById" parameterType="Grade" resultType="Grade">
+        select * from grade where id=#{id} and CourseId=#{CourseId}
     </select>
     <select id="queryGradeAll" resultType="Grade">
         select * from grade

@@ -36,4 +36,8 @@ public class ClassServiceImpl implements ClassService {
     public List<Class> queryClassAll() {
         return classMapper.queryClassAll();
     }
+
+    public List<Class> queryClassByDepartmentId(int departmentid) {
+        return classMapper.queryClassByDepartmentId(departmentid);
+    }
 }

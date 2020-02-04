@@ -8,15 +8,18 @@
         insert into student VALUES(#{id},#{name},#{classId})
     </insert>
     <delete id="deleteStudentById" parameterType="String">
-        delete from student where 学号=#{id}
+        delete from student where id=#{id}
     </delete>
     <update id="updateStudent" parameterType="Student">
-        update student set 姓名=#{name},班级号=#{classId} where 学号=#{id}
+        update student set name=#{name},classId=#{classId} where id=#{id}
     </update>
     <select id="queryStudentById" parameterType="String" resultType="Student">
-        select * from student where 学号=#{id}
+        select * from student where id=#{id}
     </select>
     <select id="queryStudentAll" resultType="Student">
         select * from student
+    </select>
+    <select id="queryStudentByClassId" parameterType="int" resultType="Student">
+        select * from student where classId=#{classid}
     </select>
 </mapper>

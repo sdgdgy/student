@@ -224,60 +224,49 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-            <!--模态框-->
-            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">提示</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>是否删除</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <%--                <a type="button" class="btn btn-primary" id="bookid" href="${pageContext.request.contextPath}/book/del/?id=${book.getBookID()}">确定</a>--%>
-                            <a type="button" class="btn btn-primary" id="gradeid" href="">确定</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+            <c:if test="${msg!=null}">
+                <script type="text/javascript">
+                    alert('${msg}');
+                </script>
+            </c:if>
             <div class="container-fluid">
                 <div class="row">
-
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>项目信息</h4>
+                                <h4>修改成绩表信息</h4>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageJump/toAddGrade">添加学生成绩</a>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <td style="text-align:center">学号</td>
-                                            <td style="text-align:center">课程号</td>
-                                            <td style="text-align:center">成绩</td>
-                                            <td style="text-align:center">操作</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="grade" items="${requestScope.get('gradelist')}">
-                                            <tr>
-                                                <td style="text-align:center">${grade.getId()}</td>
-                                                <td style="text-align:center">${grade.getCourseId()}</td>
-                                                <td style="text-align:center">${grade.getMark()}</td>
-                                                <td style="text-align:center">
-                                                    <a href="${pageContext.request.contextPath}/PageJump/toUpdateGrade?id=${grade.getId()}&courseid=${grade.getCourseId()}">更改</a> |
-                                                    <a href="#myModal" data-toggle="modal" onclick="value(${grade.getId()},${grade.getCourseId()})">删除</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="${pageContext.request.contextPath}/grade/update" method="post">
+                                    <input class="form-control" type="hidden" name="id" value="${gradeOne.get(0).getId()}">
+                                    <div class="form-group">
+                                        <label>学号</label>
+                                        <input class="form-control" type="text" value="${gradeOne.get(0).getId()}" required autocomplete="off" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="CourseId" value="${gradeOne.get(0).getCourseId()}" id="CourseId">
+                                        <label>课程所属</label>
+                                        <input class="form-control" type="text" name="CourseName" value="${gradeOne_course.get(0).getCourseName()}" id="CourseName" disabled required>
+<%--                                        <div class="input-group">--%>
+<%--                                            <input class="form-control" type="text" name="CourseName" value="${gradeOne_course.get(0).getCourseName()}" id="CourseName" disabled required>--%>
+<%--                                            <div class="input-group-btn">--%>
+<%--                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>--%>
+<%--                                                <ul class="dropdown-menu dropdown-menu-right">--%>
+<%--                                                    <c:forEach var="course" items="${requestScope.get('courselist')}">--%>
+<%--                                                        <li><a href="javascript:void(0);" onclick="value(${course.getCourseId()},'${course.getCourseName()}')">${course.getCourseName()}</a></li>--%>
+<%--                                                    </c:forEach>--%>
+<%--                                                </ul>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>成绩</label>
+                                        <input class="form-control" type="text" value="${gradeOne.get(0).getMark()}" required autocomplete="off" name="Mark">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">保存</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -296,10 +285,5 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
-<script type="text/javascript">
-    function value(id,courseid) {
-        document.getElementById("gradeid").href="${pageContext.request.contextPath}/grade/del/?id="+id+"&courseid="+courseid;
-    }
-</script>
 </body>
 </html>

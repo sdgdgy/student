@@ -224,11 +224,26 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-
+            <!--模态框-->
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">提示</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>是否删除</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <%--                <a type="button" class="btn btn-primary" id="bookid" href="${pageContext.request.contextPath}/book/del/?id=${book.getBookID()}">确定</a>--%>
+                            <a type="button" class="btn btn-primary" id="userid" href="">确定</a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
             <div class="container-fluid">
-
-
-
                 <div class="row">
 
                     <div class="col-lg-12">
@@ -238,12 +253,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageJump/toAddUser">添加用户</a>
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             <td style="text-align:center">用户名</td>
                                             <td style="text-align:center">密码</td>
-                                            <td style="text-align:center">身份类型</td>
+                                            <td style="text-align:center">管理员权限</td>
                                             <td style="text-align:center">操作</td>
                                         </tr>
                                         </thead>
@@ -252,10 +268,20 @@
                                             <tr>
                                                 <td style="text-align:center">${user.getId()}</td>
                                                 <td style="text-align:center">${user.getPassword()}</td>
-                                                <td style="text-align:center">${user.getIdentity()}</td>
                                                 <td style="text-align:center">
-                                                    <a href="">更改</a> |
-                                                    <a href="" data-toggle="modal" onclick="">删除</a>
+                                                    <label class="lyear-switch switch-solid switch-primary">
+                                                        <c:if test="${user.getIdentity()==0}">
+                                                            <input type="checkbox" onchange="checked1(${user.getId()},${user.getPassword()})" id="check">
+                                                        </c:if>
+                                                        <c:if test="${user.getIdentity()==1}">
+                                                        <input type="checkbox" checked onchange="checked1(${user.getId()},${user.getPassword()})" id="check">
+                                                        </c:if>
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href="${pageContext.request.contextPath}/PageJump/toUpdateUser?id=${user.getId()}">更改</a> |
+                                                    <a href="#myModal" data-toggle="modal" onclick="value(${user.getId()})">删除</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -280,5 +306,27 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
+<script type="text/javascript">
+    function value(id) {
+        document.getElementById("userid").href="${pageContext.request.contextPath}/User/del/?id="+id;
+    }
+    function checked1(id,password) {
+        var a;
+        if($("#check").prop("checked")==true){
+            a=1;
+        }else{
+            a=0;
+        }
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/User/updateIdentity",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            data:{"id":id,"password":password,"identity":a},
+            success:function (data) {
+            }
+            }
+        )
+    }
+</script>
 </body>
 </html>

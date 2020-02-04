@@ -224,60 +224,86 @@
 
         <!--页面主要内容-->
         <main class="lyear-layout-content">
-            <!--模态框-->
-            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">提示</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>是否删除</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <%--                <a type="button" class="btn btn-primary" id="bookid" href="${pageContext.request.contextPath}/book/del/?id=${book.getBookID()}">确定</a>--%>
-                            <a type="button" class="btn btn-primary" id="gradeid" href="">确定</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+            <c:if test="${msg!=null}">
+                <script type="text/javascript">
+                    alert('${msg}');
+                </script>
+            </c:if>
             <div class="container-fluid">
                 <div class="row">
-
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>项目信息</h4>
+                                <h4>添加成绩表信息</h4>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageJump/toAddGrade">添加学生成绩</a>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <td style="text-align:center">学号</td>
-                                            <td style="text-align:center">课程号</td>
-                                            <td style="text-align:center">成绩</td>
-                                            <td style="text-align:center">操作</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="grade" items="${requestScope.get('gradelist')}">
-                                            <tr>
-                                                <td style="text-align:center">${grade.getId()}</td>
-                                                <td style="text-align:center">${grade.getCourseId()}</td>
-                                                <td style="text-align:center">${grade.getMark()}</td>
-                                                <td style="text-align:center">
-                                                    <a href="${pageContext.request.contextPath}/PageJump/toUpdateGrade?id=${grade.getId()}&courseid=${grade.getCourseId()}">更改</a> |
-                                                    <a href="#myModal" data-toggle="modal" onclick="value(${grade.getId()},${grade.getCourseId()})">删除</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="${pageContext.request.contextPath}/grade/add" method="post">
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="DepartmentId" value="" id="DepartmentId">
+                                        <label>系别</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="DepartmentName" value="" id="DepartmentName" disabled required>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <c:forEach var="department" items="${requestScope.get('departmentlist')}">
+                                                        <li><a href="javascript:void(0);" onclick="departmentValue(${department.getDepartmentId()},'${department.getDepartmentName()}')">${department.getDepartmentName()}</a></li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="ClassId" value="" id="ClassId">
+                                        <label>班级</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="ClassName" value="" id="ClassName" disabled required>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right" id="class_ul">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>学号</label>
+                                        <input class="form-control" type="text" value="" required autocomplete="off" disabled id="StudentId_show">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" value="" id="StudentId" name="id">
+                                        <label>选择学生</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="StudentName" value="" id="StudentName" disabled required>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right" id="student_ul">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="CourseId" value="" id="CourseId">
+                                        <label>课程所属</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="CourseName" value="" id="CourseName" disabled required>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <c:forEach var="course" items="${requestScope.get('courselist')}">
+                                                        <li><a href="javascript:void(0);" onclick="courseValue(${course.getCourseId()},'${course.getCourseName()}')">${course.getCourseName()}</a></li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>成绩</label>
+                                        <input class="form-control" type="text" value="" required autocomplete="off" name="Mark">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">保存</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -297,8 +323,50 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/main.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/Chart.js"></script>
 <script type="text/javascript">
-    function value(id,courseid) {
-        document.getElementById("gradeid").href="${pageContext.request.contextPath}/grade/del/?id="+id+"&courseid="+courseid;
+    function courseValue(id,coursename){
+        $("#CourseId").val(id);
+        $("#CourseName").val(coursename);
+    }
+    function classValue(id,calssname){
+        $("#ClassId").val(id);
+        $("#ClassName").val(calssname);
+        $("#student_ul").find("li").remove();
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/grade/queryStudentByClassId",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            data:{"id":id},
+            success:function (data) {
+                json=JSON.parse(data.toString());
+                console.log(json);
+                for(var i = 0; i < json.length; i++){
+                    $("#student_ul").append("<li><a href=\"javascript:void(0);\" onclick=\"studentValue("+json[i].id+",'"+json[i].name+"')\">"+json[i].name+"</a></li>");
+                }
+            }
+        })
+    }
+    function departmentValue(id,departmentname){
+        $("#DepartmentId").val(id);
+        $("#DepartmentName").val(departmentname);
+        $("#class_ul").find("li").remove();
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/grade/queryClassByDepartmentId",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            data:{"id":id},
+            success:function (data) {
+                json=JSON.parse(data.toString());
+                for(var i = 0; i < json.length; i++){
+                    $("#class_ul").append("<li><a href=\"javascript:void(0);\" onclick=\"classValue("+json[i].ClassId+",'"+json[i].ClassName+"')\">"+json[i].ClassName+"</a></li>");
+                }
+            }
+        })
+    }
+    function studentValue(id,studentname){
+        $("#StudentId_show").val(id);
+        $("#StudentId").val(id);
+        console.log($("#StudentId").val());
+        $("#StudentName").val(studentname);
     }
 </script>
 </body>

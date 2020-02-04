@@ -9,11 +9,11 @@ public interface GradeService {
     //添加一门成绩
     int addGrade(Grade grade);
     //删除一门成绩
-    int deleteGrade(@Param("id")String id, @Param("ClassId")String ClassId);
+    int deleteGrade(@Param("id")String id, @Param("CourseId")int CourseId);
     //修改一门成绩
     int updateGrade(Grade grade);
     //根据学号查询某个学生的成绩
-    List<Grade> queryGradeById(@Param("id")String id);
+    List<Grade> queryGradeById(Grade grade);
     //查询所有成绩
     List<Grade> queryGradeAll();
 }

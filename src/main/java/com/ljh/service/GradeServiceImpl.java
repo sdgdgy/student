@@ -19,8 +19,8 @@ public class GradeServiceImpl implements GradeService {
         return 1;
     }
 
-    public int deleteGrade(String id, String ClassId) {
-        gradeMapper.deleteGrade(id,ClassId);
+    public int deleteGrade(String id, int CourseId) {
+        gradeMapper.deleteGrade(id,CourseId);
         return 1;
     }
 
@@ -29,8 +29,8 @@ public class GradeServiceImpl implements GradeService {
         return 1;
     }
 
-    public List<Grade> queryGradeById(String id) {
-        return gradeMapper.queryGradeById(id);
+    public List<Grade> queryGradeById(Grade grade) {
+        return gradeMapper.queryGradeById(grade);
     }
 
     public List<Grade> queryGradeAll() {

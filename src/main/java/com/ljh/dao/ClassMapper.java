@@ -16,4 +16,6 @@ public interface ClassMapper {
     List<Class> queryClassById(@Param("id")int id);
     //查询所有班级
     List<Class> queryClassAll();
+
+    List<Class> queryClassByDepartmentId(@Param("departmentid")int departmentid);
 }
