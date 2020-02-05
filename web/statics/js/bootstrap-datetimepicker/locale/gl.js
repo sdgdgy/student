@@ -31,13 +31,13 @@
                 return '[mañá ' + ((this.hours() !== 1) ? 'ás' : 'á') + '] LT';
             },
             nextWeek : function () {
-                return 'dddd [' + ((this.hours() !== 1) ? 'ás' : 'a') + '] LT';
+                return 'dddd [' + ((this.hours() !== 1) ? 'ás' : 'index_student.jsp') + '] LT';
             },
             lastDay : function () {
-                return '[onte ' + ((this.hours() !== 1) ? 'á' : 'a') + '] LT';
+                return '[onte ' + ((this.hours() !== 1) ? 'á' : 'index_student.jsp') + '] LT';
             },
             lastWeek : function () {
-                return '[o] dddd [pasado ' + ((this.hours() !== 1) ? 'ás' : 'a') + '] LT';
+                return '[o] dddd [pasado ' + ((this.hours() !== 1) ? 'ás' : 'index_student.jsp') + '] LT';
             },
             sameElse : 'L'
         },

@@ -21,4 +21,13 @@
     <select id="queryUserAll" resultType="User">
         select * from user
     </select>
+    <select id="queryStudentMessage" resultType="StudentMessage" parameterType="String">
+        SELECT student.student.id,student.student.name,student.grade.CourseId,student.course.CourseName,student.course.Credit,student.grade.Mark
+        FROM student.grade
+        INNER join student.student
+        on student.grade.id=student.student.id
+        INNER join student.course
+        on  student.course.CourseId=student.grade.CourseId
+        where student.student.id=#{id}
+    </select>
 </mapper>

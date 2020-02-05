@@ -3340,7 +3340,7 @@ module.exports = {
         });
     }
 
-    meridiem('a', true);
+    meridiem('index_student.jsp', true);
     meridiem('A', false);
 
     // ALIASES
@@ -3356,7 +3356,7 @@ module.exports = {
         return locale._meridiemParse;
     }
 
-    addRegexToken('a',  matchMeridiem);
+    addRegexToken('index_student.jsp',  matchMeridiem);
     addRegexToken('A',  matchMeridiem);
     addRegexToken('H',  match1to2);
     addRegexToken('h',  match1to2);
@@ -3375,7 +3375,7 @@ module.exports = {
         var kInput = toInt(input);
         array[HOUR] = kInput === 24 ? 0 : kInput;
     });
-    addParseToken(['a', 'A'], function (input, array, config) {
+    addParseToken(['index_student.jsp', 'A'], function (input, array, config) {
         config._isPm = config._locale.isPM(input);
         config._meridiem = input;
     });

@@ -1,5 +1,6 @@
 package com.ljh.service;
 
+import com.ljh.pojo.StudentMessage;
 import com.ljh.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,4 +19,6 @@ public interface UserService {
     List<User> queryUserAll();
 
     List<User> queryUser(User user);
+
+    List<StudentMessage> queryStudentMessage(@Param("id") String id);
 }

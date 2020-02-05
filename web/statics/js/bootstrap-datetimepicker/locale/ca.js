@@ -63,7 +63,7 @@
                 (number === 3) ? 'r' :
                 (number === 4) ? 't' : 'è';
             if (period === 'w' || period === 'W') {
-                output = 'a';
+                output = 'index_student.jsp';
             }
             return number + output;
         },

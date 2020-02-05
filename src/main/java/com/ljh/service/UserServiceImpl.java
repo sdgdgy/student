@@ -1,6 +1,7 @@
 package com.ljh.service;
 
 import com.ljh.dao.UserMapper;
+import com.ljh.pojo.StudentMessage;
 import com.ljh.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,5 +40,9 @@ public class UserServiceImpl implements UserService {
 
     public List<User> queryUser(User user) {
         return userMapper.queryUser(user);
+    }
+
+    public List<StudentMessage> queryStudentMessage(String id) {
+        return userMapper.queryStudentMessage(id);
     }
 }

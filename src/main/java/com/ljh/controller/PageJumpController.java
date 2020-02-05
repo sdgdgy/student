@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -40,58 +41,70 @@ public class PageJumpController {
     @RequestMapping("toDepartment")
     public String toDepartment(Model model){
         model.addAttribute("departmentlist",departmentService.queryDepartmentAll());
-        return "department";
+        return "admin/department";
     }
     @RequestMapping("toClass")
     public String toClass(Model model){
         model.addAttribute("classlist",classService.queryClassAll());
-        return "class";
+        return "admin/class";
     }
     @RequestMapping("toCourse")
     public String toCourse(Model model){
         model.addAttribute("courselist",courseService.queryCourseAll());
-        return "course";
+        return "admin/course";
     }
     @RequestMapping("toGrade")
     public String toGrade(Model model){
         model.addAttribute("gradelist",gradeService.queryGradeAll());
-        return "grade";
+        return "admin/grade";
     }
     @RequestMapping("toStudent")
     public String toStudent(Model model){
         model.addAttribute("studentlist",studentService.queryStudentAll());
-        return "student";
+        return "admin/student";
     }
     @RequestMapping("toUser")
     public String toUser(Model model){
         model.addAttribute("userlist",userService.queryUserAll());
-        return "user";
+        return "admin/user";
     }
     @RequestMapping("toPersonalInformation")
-    public String toPersonalInformation(){
-        return "personalInformation";
+    public String toPersonalInformation(Model model, HttpSession httpSession){
+        String id=httpSession.getAttribute("username").toString();
+        if(userService.queryUserById(id).get(0).getIdentity()!=1){
+            model.addAttribute("identity","学生");
+        }else{
+            model.addAttribute("identity","管理员");
+        }
+        if(userService.queryUserById(id).get(0).getIdentity()!=1){
+            model.addAttribute("personalName",studentService.queryStudentById(id).get(0).getName());
+            model.addAttribute("className",classService.queryClassById(studentService.queryStudentById(id).get(0).getClassId()).get(0).getClassName());
+            model.addAttribute("departmentName",departmentService.queryDepartmentById(classService.queryClassById(studentService.queryStudentById(id).get(0).getClassId()).get(0).getDepartmentId()).get(0).getDepartmentName());
+        }
+        return "admin/personalInformation";
     }
     @RequestMapping("toUpdatePassword")
     public String toUpdatePassword(){
-        return "updatePassword";
+        return "admin/updatePassword";
     }
     @RequestMapping("toManagement")
-    public String toManagement(){
-        return "management";
+    public String toManagement(Model model){
+        model.addAttribute("allMessageList",gradeService.queryAllMessage());
+        return "admin/management";
     }
     @RequestMapping("toUpdateDepartment")
     public String toUpdateDepartment(int id, Model model){
         model.addAttribute("departmentOne",departmentService.queryDepartmentById(id));
-        return "updateDepartment";
+        return "admin/updateDepartment";
     }
     @RequestMapping("toAddDepartment")
     public String toAddDepartment(){
-        return "addDepartment";
+        return "admin/addDepartment";
     }
     @RequestMapping("toAddClass")
     public String toAddClass(Model model){
         model.addAttribute("departmentlist",departmentService.queryDepartmentAll());
-        return "addClass";
+        return "admin/addClass";
     }
     @RequestMapping("toUpdateClass")
     public String toUpdateClass(int id, Model model){
@@ -99,30 +112,30 @@ public class PageJumpController {
         model.addAttribute("classOne",list);
         model.addAttribute("departmentlist",departmentService.queryDepartmentAll());
         model.addAttribute("classOne_department",departmentService.queryDepartmentById(list.get(0).getDepartmentId()));
-        return "updateClass";
+        return "admin/updateClass";
     }
     @RequestMapping("toAddCourse")
     public String toAddCourse(){
-        return "addCourse";
+        return "admin/addCourse";
     }
     @RequestMapping("toUpdateCourse")
     public String toUpdateCourse(int id,Model model){
         model.addAttribute("courseOne",courseService.queryCourseById(id));
-        return "updateCourse";
+        return "admin/updateCourse";
     }
     @RequestMapping("toUpdateUser")
     public String toUpdateUser(String id,Model model){
         model.addAttribute("userOne",userService.queryUserById(id));
-        return "updateUser";
+        return "admin/updateUser";
     }
     @RequestMapping("toAddUser")
     public String toAddUser(){
-        return "addUser";
+        return "admin/addUser";
     }
     @RequestMapping("toAddStudent")
     public String toAddStudent(Model model){
         model.addAttribute("classlist",classService.queryClassAll());
-        return "addStudent";
+        return "admin/addStudent";
     }
     @RequestMapping("toUpdateStudent")
     public String toUpdateStudent(String id,Model model){
@@ -130,13 +143,13 @@ public class PageJumpController {
         model.addAttribute("studentOne",list);
         model.addAttribute("classlist",classService.queryClassAll());
         model.addAttribute("studentOne_class",classService.queryClassById(list.get(0).getClassId()));
-        return "updateStudent";
+        return "admin/updateStudent";
     }
     @RequestMapping("toAddGrade")
     public String toAddGrade(Model model){
         model.addAttribute("departmentlist",departmentService.queryDepartmentAll());
         model.addAttribute("courselist",courseService.queryCourseAll());
-        return "addGrade";
+        return "admin/addGrade";
     }
     @RequestMapping("toUpdateGrade")
     public String toUpdateGrade(Model model,String id,int courseid){
@@ -144,6 +157,32 @@ public class PageJumpController {
         model.addAttribute("gradeOne",gradeService.queryGradeById(grade));
         model.addAttribute("courselist",courseService.queryCourseAll());
         model.addAttribute("gradeOne_course",courseService.queryCourseById(courseid));
-        return "updateGrade";
+        return "admin/updateGrade";
+    }
+    @RequestMapping("toStudentPage")
+    public String toStudentPage(Model model,HttpSession httpSession){
+        model.addAttribute("studentMessageList",userService.queryStudentMessage(httpSession.getAttribute("username").toString()));
+        return "student/index_student";
+    }
+    @RequestMapping("toPersonalInformation_student")
+    public String toPersonalInformation_student(Model model,HttpSession httpSession){
+        String id=httpSession.getAttribute("username").toString();
+        if(userService.queryUserById(id).get(0).getIdentity()!=1){
+            model.addAttribute("identity","学生");
+        }else{
+            model.addAttribute("identity","管理员");
+        }
+        if(userService.queryUserById(id).get(0).getIdentity()!=1){
+            model.addAttribute("personalName",studentService.queryStudentById(id).get(0).getName());
+            model.addAttribute("className",classService.queryClassById(studentService.queryStudentById(id).get(0).getClassId()).get(0).getClassName());
+            model.addAttribute("departmentName",departmentService.queryDepartmentById(classService.queryClassById(studentService.queryStudentById(id).get(0).getClassId()).get(0).getDepartmentId()).get(0).getDepartmentName());
+        }else{
+
+        }
+        return "student/personalInformation_student";
+    }
+    @RequestMapping("toUpdatePassword_student")
+    public String toUpdatePassword_student(){
+        return "student/updatePassword_student";
     }
 }

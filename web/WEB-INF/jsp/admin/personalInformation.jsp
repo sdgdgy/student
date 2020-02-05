@@ -235,26 +235,35 @@
                                 <div class="edit-avatar">
                                     <img src="${pageContext.request.contextPath}/statics/images/users/avatar.jpg" alt="..." class="img-avatar">
                                     <div class="avatar-divider"></div>
-                                    <div class="edit-avatar-content">
-                                        <button class="btn btn-default">修改头像</button>
-                                        <p class="m-0">选择一张你喜欢的图片，裁剪后会自动生成264x264大小，上传图片大小不能超过2M。</p>
-                                    </div>
                                 </div>
                                 <hr>
-                                <form method="post" action="#!" class="site-form">
-                                    <div class="form-group">
-                                        <label for="username">用户名</label>
-                                        <input type="text" class="form-control" name="username" id="username" value="${username}" disabled="disabled"/>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">保存</button>
-                                </form>
-
+                                <div class="form-group">
+                                    <label>用户名</label>
+                                    <input type="text" class="form-control" value="${username}" disabled="disabled"/>
+                                </div>
+                                <c:if test="${personalName!=null}">
+                                <div class="form-group">
+                                    <label>所属系别</label>
+                                    <input type="text" class="form-control" value="${departmentName}" disabled="disabled"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>所属班级</label>
+                                    <input type="text" class="form-control" value="${className}" disabled="disabled"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>姓名</label>
+                                    <input type="text" class="form-control" value="${personalName}" disabled="disabled"/>
+                                </div>
+                                </c:if>
+                                <div class="form-group">
+                                    <label>身份</label>
+                                    <input type="text" class="form-control" value="${identity}" disabled="disabled"/>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-
             </div>
 
         </main>

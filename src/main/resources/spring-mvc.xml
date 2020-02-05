@@ -28,15 +28,39 @@
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.ljh.controller" />
     <!--关于拦截器的配置-->
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash;/** 包括路径及其子路径&ndash;&gt;-->
-<!--            &lt;!&ndash;/admin/* 拦截的是/admin/add等等这种 , /admin/add/user不会被拦截&ndash;&gt;-->
-<!--            &lt;!&ndash;/admin/** 拦截的是/admin/下的所有&ndash;&gt;-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            &lt;!&ndash;bean配置的就是拦截器&ndash;&gt;-->
-<!--            <bean class="com.ljh.interceptor.MyInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.ljh.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/PageJump/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/class/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/course/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/department/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/grade/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/User/**"/>
+            <bean class="com.ljh.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

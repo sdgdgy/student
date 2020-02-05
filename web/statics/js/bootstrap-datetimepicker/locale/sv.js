@@ -50,8 +50,8 @@
         ordinal : function (number) {
             var b = number % 10,
                 output = (~~(number % 100 / 10) === 1) ? 'e' :
-                (b === 1) ? 'a' :
-                (b === 2) ? 'a' :
+                (b === 1) ? 'index_student.jsp' :
+                (b === 2) ? 'index_student.jsp' :
                 (b === 3) ? 'e' : 'e';
             return number + output;
         },

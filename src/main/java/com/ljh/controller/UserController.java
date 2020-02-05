@@ -18,21 +18,17 @@ public class UserController {
     @Autowired
     @Qualifier("UserServiceImpl")
     private UserService userService;
-    @Autowired
-    @Qualifier("GradeServiceImpl")
-    private GradeService gradeService;
     @RequestMapping("login")
-    public String login(User user, HttpSession httpSession,Model model){
+    public String login(User user, HttpSession httpSession){
         User user1= null;
         try {
             user1 = userService.queryUser(user).get(0);
             if(user1!=null){
                 httpSession.setAttribute("username",user1.getId());
-                if(user1.getIdentity()==0){
-                    return "management";
+                if(user1.getIdentity()==1){
+                    return "redirect:/PageJump/toManagement";
                 }else{
-                    model.addAttribute("allMessageList",gradeService.queryGradeAll());
-                    return "management";
+                    return "redirect:/PageJump/toStudentPage";
                 }
             }
             return "login";
@@ -50,7 +46,7 @@ public class UserController {
     public String updatePassword(String confirmpwd,HttpSession httpSession){
         User user=new User(httpSession.getAttribute("username").toString(),confirmpwd,0);
         userService.updateUser(user);
-        return "management";
+        return "admin/management";
     }
     @RequestMapping("del")
     public String del(String id){
@@ -77,5 +73,11 @@ public class UserController {
     public void updateIdentity(String id,String password,int identity){
         User user=new User(id,password,identity);
         userService.updateUser(user);
+    }
+    @RequestMapping("updatePassword_student")
+    public String updatePassword_student(String confirmpwd,HttpSession httpSession){
+        User user=new User(httpSession.getAttribute("username").toString(),confirmpwd,0);
+        userService.updateUser(user);
+        return "redirect:/PageJump/toStudentPage";
     }
 }

@@ -33,7 +33,7 @@
             if (hours > 11) {
                 return isLower ? 'p.t.m.' : 'P.T.M.';
             } else {
-                return isLower ? 'a.t.m.' : 'A.T.M.';
+                return isLower ? 'index_student.jsp.t.m.' : 'A.T.M.';
             }
         },
         calendar : {
