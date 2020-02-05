@@ -1,5 +1,6 @@
 package com.ljh.dao;
 
+import com.ljh.pojo.AllMessage;
 import com.ljh.pojo.Grade;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +17,6 @@ public interface GradeMapper {
     List<Grade> queryGradeById(Grade grade);
     //查询所有成绩
     List<Grade> queryGradeAll();
+
+    List<AllMessage> queryAllMessage();
 }

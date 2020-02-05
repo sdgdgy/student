@@ -1,6 +1,7 @@
 package com.ljh.service;
 
 import com.ljh.dao.GradeMapper;
+import com.ljh.pojo.AllMessage;
 import com.ljh.pojo.Grade;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,5 +36,9 @@ public class GradeServiceImpl implements GradeService {
 
     public List<Grade> queryGradeAll() {
         return gradeMapper.queryGradeAll();
+    }
+
+    public List<AllMessage> queryAllMessage() {
+        return gradeMapper.queryAllMessage();
     }
 }

@@ -1,6 +1,7 @@
 package com.ljh.controller;
 
 import com.ljh.pojo.User;
+import com.ljh.service.GradeService;
 import com.ljh.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,8 +18,11 @@ public class UserController {
     @Autowired
     @Qualifier("UserServiceImpl")
     private UserService userService;
+    @Autowired
+    @Qualifier("GradeServiceImpl")
+    private GradeService gradeService;
     @RequestMapping("login")
-    public String login(User user, HttpSession httpSession){
+    public String login(User user, HttpSession httpSession,Model model){
         User user1= null;
         try {
             user1 = userService.queryUser(user).get(0);
@@ -27,6 +31,7 @@ public class UserController {
                 if(user1.getIdentity()==0){
                     return "management";
                 }else{
+                    model.addAttribute("allMessageList",gradeService.queryGradeAll());
                     return "management";
                 }
             }

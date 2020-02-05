@@ -224,13 +224,8 @@
     
     <!--页面主要内容-->
     <main class="lyear-layout-content">
-      
       <div class="container-fluid">
-        
-        
-        
         <div class="row">
-          
           <div class="col-lg-12">
             <div class="card">
               <div class="card-header">
@@ -240,10 +235,34 @@
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead>
-                      <tr>
-                      </tr>
+                    <tr>
+                      <td style="text-align:center">系号</td>
+                      <td style="text-align:center">系名</td>
+                      <td style="text-align:center">班级号</td>
+                      <td style="text-align:center">班级名</td>
+                      <td style="text-align:center">学号</td>
+                      <td style="text-align:center">姓名</td>
+                      <td style="text-align:center">课程号</td>
+                      <td style="text-align:center">课程名称</td>
+                      <td style="text-align:center">学分</td>
+                      <td style="text-align:center">成绩</td>
+                    </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="allmsg" items="${requestScope.get('allMessageList')}">
+                      <tr>
+                        <td style="text-align:center">${allmsg.getDepartmentId()}</td>
+                        <td style="text-align:center">${allmsg.getDepartmentName()}</td>
+                        <td style="text-align:center">${allmsg.getClassId()}</td>
+                        <td style="text-align:center">${allmsg.getClassName()}</td>
+                        <td style="text-align:center">${allmsg.getId()}</td>
+                        <td style="text-align:center">${allmsg.getName()}</td>
+                        <td style="text-align:center">${allmsg.getCourseId()}</td>
+                        <td style="text-align:center">${allmsg.getCourseName()}</td>
+                        <td style="text-align:center">${allmsg.getCredit()}</td>
+                        <td style="text-align:center">${allmsg.getMark()}</td>
+                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>

@@ -18,4 +18,16 @@
     <select id="queryGradeAll" resultType="Grade">
         select * from grade
     </select>
+    <select id="queryAllMessage" resultType="AllMessage">
+        SELECT student.department.DepartmentId,student.department.DepartmentName,student.student.classId,student.class.className,student.student.id,student.student.name,student.grade.CourseId,student.course.CourseName,student.course.Credit,student.grade.Mark
+        FROM student.grade
+        INNER join student.student
+        on student.grade.id=student.student.id
+        INNER join student.class
+        on  student.student.classId=student.class.classId
+        INNER join student.course
+        on  student.course.CourseId=student.grade.CourseId
+        INNER join student.department
+        on  student.department.DepartmentId=student.class.DepartmentId;
+    </select>
 </mapper>
